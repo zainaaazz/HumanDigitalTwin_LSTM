@@ -1,0 +1,49 @@
+Mapped 6364 sites to 20 activity types.
+Train students: 3309
+Detected 1026 activity types.
+Test students: 3146
+Before scaling: (3309, 10, 1026)
+After scaling: (3309, 10, 1026) (3146, 10, 1026)
+
+  super().__init__(**kwargs)
+2025-06-26 23:00:26.354899: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ masking (Masking)                    │ (None, 10, 1026)            │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ lstm (LSTM)                          │ (None, 300)                 │       1,592,400 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             301 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 1,592,701 (6.08 MB)
+ Trainable params: 1,592,701 (6.08 MB)
+ Non-trainable params: 0 (0.00 B)
+Epoch 1/50
+2025-06-26 23:00:30.582177: E tensorflow/core/util/util.cc:131] oneDNN supports DT_BOOL only on platforms with AVX-512. Falling back to the default Eigen-based implementation if present.
+34/34 - 8s - 221ms/step - accuracy: 0.7722 - loss: 0.5846 - precision: 0.6811 - recall: 0.6438 - val_accuracy: 0.5000 - val_loss: 0.7050 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 2/50
+34/34 - 3s - 94ms/step - accuracy: 0.8288 - loss: 0.5128 - precision: 0.7235 - recall: 0.7075 - val_accuracy: 0.5000 - val_loss: 0.7160 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 3/50
+34/34 - 3s - 93ms/step - accuracy: 0.8457 - loss: 0.4861 - precision: 0.7221 - recall: 0.7621 - val_accuracy: 0.5000 - val_loss: 0.7245 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 4/50
+34/34 - 3s - 94ms/step - accuracy: 0.8663 - loss: 0.4539 - precision: 0.7425 - recall: 0.7697 - val_accuracy: 0.5000 - val_loss: 0.7342 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 5/50
+34/34 - 3s - 93ms/step - accuracy: 0.8813 - loss: 0.4285 - precision: 0.7471 - recall: 0.7884 - val_accuracy: 0.5000 - val_loss: 0.7430 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 6/50
+34/34 - 3s - 93ms/step - accuracy: 0.8937 - loss: 0.4128 - precision: 0.7695 - recall: 0.7967 - val_accuracy: 0.5000 - val_loss: 0.7525 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 7/50
+34/34 - 3s - 93ms/step - accuracy: 0.9179 - loss: 0.3644 - precision: 0.7954 - recall: 0.8333 - val_accuracy: 0.5000 - val_loss: 0.7611 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 8/50
+34/34 - 3s - 95ms/step - accuracy: 0.9276 - loss: 0.3400 - precision: 0.8039 - recall: 0.8451 - val_accuracy: 0.5000 - val_loss: 0.7712 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 9/50
+34/34 - 3s - 95ms/step - accuracy: 0.9480 - loss: 0.2919 - precision: 0.8287 - recall: 0.8866 - val_accuracy: 0.5000 - val_loss: 0.7826 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 10/50
+34/34 - 3s - 95ms/step - accuracy: 0.9641 - loss: 0.2445 - precision: 0.8496 - recall: 0.9184 - val_accuracy: 0.5000 - val_loss: 0.7934 - val_precision: 0.4619 - val_recall: 1.0000
+Epoch 11/50
+34/34 - 3s - 94ms/step - accuracy: 0.9667 - loss: 0.2385 - precision: 0.8783 - recall: 0.9080 - val_accuracy: 0.5000 - val_loss: 0.8033 - val_precision: 0.4619 - val_recall: 1.0000
+99/99 - 2s - 15ms/step - accuracy: 0.5000 - loss: 0.7050 - precision: 0.4619 - recall: 1.0000
+104/104 ━━━━━━━━━━━━━━━━━━━━ 2s 17ms/step
+99/99 ━━━━━━━━━━━━━━━━━━━━ 1s 14ms/step
