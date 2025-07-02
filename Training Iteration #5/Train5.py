@@ -95,7 +95,7 @@ X_mon,  y_mon  = prepare_panel(dfm, 'month')
 print(f'→ WEEK panel: X={X_week.shape}, y={y_week.shape}')
 print(f'→ MONTH panel: X={X_mon.shape}, y={y_mon.shape}')
 
-# ── 5. Model builders (with stronger regularization & added normalization) ─────────
+# ── 5. Model builders (with adjustments) ───────────────────────────────────────────
 def build_lstm(
     input_shape,
     hidden=(16, 4),
@@ -129,12 +129,12 @@ def build_lstm(
 
 def build_cnn(
     input_shape,
-    filters=16,
-    kernel=3,
+    filters=32,
+    kernel=5,
     pool=2,
-    dr=0.6,
-    lr=1e-3,
-    l2_reg=1e-3
+    dr=0.5,
+    lr=5e-4,
+    l2_reg=5e-4
 ):
     model = Sequential([
         Input(shape=input_shape),
@@ -164,18 +164,18 @@ def build_cnn(
     )
     return model
 
-# ── 6. 10-fold CV with tightened early stopping ───────────────────────────────────
+# ── 6. 10-fold CV with updated early stopping and detailed report ─────────────────
 def cross_validate(X, y, builder, name, epochs=700, batch_size=128, **kwargs):
     os.makedirs('logs', exist_ok=True)
     skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=SEED)
-    accs, f1s, aucs = [], [], []
+    fold_metrics = []
 
     for fold, (train_idx, test_idx) in enumerate(skf.split(X, y), start=1):
         print(f"\n=== {name} fold {fold} ===")
         model = builder(X.shape[1:], **kwargs)
 
         callbacks = [
-            EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True),
+            EarlyStopping(monitor='val_loss', patience=8, restore_best_weights=True),
             ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, min_lr=1e-6),
             CSVLogger(os.path.join('logs', f'{name}_fold{fold}.csv'), append=False)
         ]
@@ -189,39 +189,55 @@ def cross_validate(X, y, builder, name, epochs=700, batch_size=128, **kwargs):
             callbacks=callbacks
         )
 
+        actual_epochs = len(history.history['loss'])
         preds = model.predict(X[test_idx], verbose=0).ravel()
         binary = (preds >= 0.5).astype(int)
 
-        accs.append( accuracy_score(y[test_idx], binary) )
-        f1s.append(   f1_score(y[test_idx], binary) )
-        aucs.append(  roc_auc_score(y[test_idx], preds)  )
+        acc = accuracy_score(y[test_idx], binary)
+        f1  = f1_score(y[test_idx], binary)
+        auc = roc_auc_score(y[test_idx], preds)
 
-        print(f"-- Fold {fold} | Acc: {accs[-1]:.4f}, F1: {f1s[-1]:.4f}, AUC: {aucs[-1]:.4f}")
+        fold_metrics.append({
+            'fold': fold,
+            'epochs': actual_epochs,
+            'accuracy': acc,
+            'f1_score': f1,
+            'auc': auc
+        })
 
-    return np.mean(accs), np.mean(f1s), np.mean(aucs)
+        print(f"-- Fold {fold} | Epochs: {actual_epochs}, Acc: {acc:.4f}, F1: {f1:.4f}, AUC: {auc:.4f}")
 
-# ── 7. Run CV over all models ─────────────────────────────────────────────────────
-results = {
-    'LSTM_WEEK'  : cross_validate(
-        X_week, y_week, build_lstm, name='LSTM_WEEK',
-        hidden=(32,  8), lr=1e-4, dropout=0.4, l2_reg=1e-3
-    ),
-    'LSTM_MONTH' : cross_validate(
-        X_mon,  y_mon,  build_lstm, name='LSTM_MONTH',
-        hidden=(32, 16), lr=1e-4, dropout=0.4, l2_reg=1e-3
-    ),
-    'CNN_WEEK'   : cross_validate(
-        X_week, y_week, build_cnn, name='CNN_WEEK',
-        filters=16, kernel=3, pool=2, dr=0.6, lr=1e-3, l2_reg=1e-3
-    ),
-    'CNN_MONTH'  : cross_validate(
-        X_mon,  y_mon,  build_cnn, name='CNN_MONTH',
-        filters=16, kernel=3, pool=2, dr=0.6, lr=1e-3, l2_reg=1e-3
+    return fold_metrics
+
+# ── 7. Run CV over all models and collect detailed reports ─────────────────────────
+reports = {}
+for model_name, params in {
+    'LSTM_WEEK' : {'X': X_week, 'y': y_week, 'builder': build_lstm, 'kwargs': dict(hidden=(32,8), lr=1e-4, dropout=0.4, l2_reg=1e-3)},
+    'LSTM_MONTH': {'X': X_mon,  'y': y_mon,  'builder': build_lstm, 'kwargs': dict(hidden=(32,16), lr=1e-4, dropout=0.4, l2_reg=1e-3)},
+    'CNN_WEEK'  : {'X': X_week, 'y': y_week, 'builder': build_cnn, 'kwargs': {}},
+    'CNN_MONTH' : {'X': X_mon,  'y': y_mon,  'builder': build_cnn, 'kwargs': {}}
+}.items():
+    print(f"\n*** Running {model_name} ***")
+    metrics = cross_validate(
+        params['X'], params['y'], params['builder'], name=model_name, **params['kwargs']
     )
-}
+    reports[model_name] = metrics
 
-# ── 8. Print summary ─────────────────────────────────────────────────────────────
-print("\nModel          | Accuracy | F1-score |   AUC")
-print("-----------------------------------------------")
-for name, (acc, f1, auc) in results.items():
-    print(f"{name:<14}|  {acc:.4f}   |  {f1:.4f}   |  {auc:.4f}")
+# ── 8. Print detailed summary report ───────────────────────────────────────────────
+print("\nDETAILED TRAINING REPORT")
+print("Model     | Fold | Epochs | Accuracy | F1-score | AUC")
+print("---------------------------------------------------")
+for model_name, metrics in reports.items():
+    for m in metrics:
+        print(f"{model_name:<10}| {m['fold']:>4} | {m['epochs']:>6} | {m['accuracy']:.4f}  | {m['f1_score']:.4f}   | {m['auc']:.4f}")
+
+# Optionally: compute and print averages
+print("\nAVERAGE METRICS")
+print("Model     | Avg Epochs | Avg Acc | Avg F1  | Avg AUC")
+print("------------------------------------------------")
+for model_name, metrics in reports.items():
+    avg_epochs = np.mean([m['epochs'] for m in metrics])
+    avg_acc    = np.mean([m['accuracy'] for m in metrics])
+    avg_f1     = np.mean([m['f1_score'] for m in metrics])
+    avg_auc    = np.mean([m['auc'] for m in metrics])
+    print(f"{model_name:<10}| {avg_epochs:>10.1f} | {avg_acc:.4f}  | {avg_f1:.4f} | {avg_auc:.4f}")
