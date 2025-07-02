@@ -1,69 +1,63 @@
 import os
+import glob
 import streamlit as st
 import pandas as pd
 
-# Directories
-DATA_DIR = os.path.join(os.getcwd(), 'data')
+# Directory containing log outputs
 LOG_DIR = os.path.join(os.getcwd(), 'TrainX_Logs')
 
 @st.cache_data
-def load_predictions(model_name: str) -> pd.DataFrame:
+def load_logs(model_name: str) -> pd.DataFrame:
     """
-    Load test-set predictions for the given model.
-    Expected file: TrainX_Logs/{model_name}_all_test_predictions.csv
-    Contains columns: student_id, predicted, actual_score, prob_pass
+    Load and aggregate CSVLogger logs for the selected model.
+    Expects files like TrainX_Logs/{model_name}_fold1.csv ... _fold10.csv
     """
-    fname = f"{model_name}_all_test_predictions.csv"
-    path = os.path.join(LOG_DIR, fname)
-    if not os.path.exists(path):
-        st.error(f"Prediction file not found: {path}")
+    pattern = os.path.join(LOG_DIR, f"{model_name}_fold*.csv")
+    files = sorted(glob.glob(pattern))
+    if not files:
+        st.error(f"No log files found for model '{model_name}' in {LOG_DIR}")
         st.stop()
-    return pd.read_csv(path)
+    dfs = []
+    for path in files:
+        df = pd.read_csv(path)
+        try:
+            fold = int(os.path.basename(path).split('_fold')[1].split('.')[0])
+        except:
+            fold = -1
+        df['fold'] = fold
+        dfs.append(df)
+    return pd.concat(dfs, ignore_index=True)
 
-# --- Streamlit App ---
-st.set_page_config(page_title="All Student Records & Predictions", layout="wide")
-st.title("🎓 All Student Records with Predictions")
+# --- Streamlit UI ---
+st.set_page_config(page_title="Model Training Logs & Relationships", layout="wide")
+st.title("📊 Model Training Logs & Feature Relationships")
 
-# Sidebar: models & optional upload
+# Sidebar: model selection
 models = ['LSTM_WEEK', 'LSTM_MONTH', 'CNN_WEEK', 'CNN_MONTH']
-model = st.sidebar.selectbox("Select model for display", models)
+model_name = st.sidebar.selectbox("Select model to inspect", models)
 
-# Load student data, with fallback to uploader
-default_students_path = os.path.join(DATA_DIR, 'students.csv')
-if os.path.exists(default_students_path):
-    students = pd.read_csv(default_students_path)
-else:
-    uploaded_file = st.sidebar.file_uploader("Upload students CSV", type=['csv'])
-    if uploaded_file:
-        students = pd.read_csv(uploaded_file)
-    else:
-        st.sidebar.error(f"No students.csv found at {default_students_path}. Please upload your CSV file.")
-        st.stop()
+# Load logs
+df = load_logs(model_name)
+st.subheader(f"Aggregated CSVLogger Metrics for {model_name}")
+st.dataframe(df, use_container_width=True)
 
-# Load predictions
-predictions = load_predictions(model)
-
-# Merge on student_id (right join to show only those with predictions)
-df_all = pd.merge(students, predictions, on='student_id', how='right')
-
-# Show table
-st.subheader(f"Full Records & Predicted vs Actual for {model}")
-st.dataframe(df_all, use_container_width=True)
-
-# Download button
-csv = df_all.to_csv(index=False).encode('utf-8')
+# Download combined logs
+download_bytes = df.to_csv(index=False).encode('utf-8')
 st.download_button(
-    label="Download all records as CSV",
-    data=csv,
-    file_name=f"{model}_all_records_predictions.csv",
+    label="Download combined logs",
+    data=download_bytes,
+    file_name=f"{model_name}_training_logs.csv",
     mime="text/csv"
 )
 
-# Display counts
-st.write(f"**Total students displayed:** {df_all.shape[0]}")
+st.write(f"**Total rows:** {len(df)} (_folds × epochs_)" )
 
-# Example: show basic engagement metrics if present
-eng_cols = [c for c in df_all.columns if 'engagement' in c.lower()]
-if eng_cols:
-    st.subheader("Engagement Metrics Summary")
-    st.write(df_all[eng_cols].describe())
+# Relationship mapping: correlate training metrics
+st.subheader("🔗 Correlation of Training Metrics to Fold")
+metrics_cols = [c for c in df.columns if c not in ['epoch','fold']]
+if metrics_cols:
+    corr = df[metrics_cols + ['fold']].corr()['fold'].sort_values(ascending=False)
+    st.bar_chart(corr.drop('fold'))
+else:
+    st.info("No numeric metrics columns found for correlation.")
+
