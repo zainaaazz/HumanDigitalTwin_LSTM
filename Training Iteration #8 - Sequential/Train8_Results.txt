@@ -1,0 +1,193 @@
+PS C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM> & C:/Users/USER-PC/AppData/Local/Programs/Python/Python310/python.exe c:/Users/USER-PC/Desktop/HumanDigitalTwin_LSTM/Train.py
+2025-07-08 14:09:22.088111: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-07-08 14:09:23.211879: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Weekly input dtype: float32 labels dtype: float32
+Monthly input dtype: float32 labels dtype: float32
+2025-07-08 14:09:31.630128: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+=== Weekly Training ===
+Epoch 1/30
+140/140 - 3s - 21ms/step - accuracy: 0.7327 - loss: 0.6001 - val_accuracy: 0.7988 - val_loss: 0.5005
+Epoch 2/30
+140/140 - 0s - 3ms/step - accuracy: 0.7920 - loss: 0.5166 - val_accuracy: 0.7968 - val_loss: 0.4849
+Epoch 3/30
+140/140 - 0s - 3ms/step - accuracy: 0.7924 - loss: 0.5044 - val_accuracy: 0.7948 - val_loss: 0.4781
+Epoch 4/30
+140/140 - 0s - 3ms/step - accuracy: 0.7956 - loss: 0.4972 - val_accuracy: 0.7948 - val_loss: 0.4709
+Epoch 5/30
+140/140 - 0s - 3ms/step - accuracy: 0.7931 - loss: 0.4888 - val_accuracy: 0.7988 - val_loss: 0.4698
+Epoch 6/30
+140/140 - 0s - 3ms/step - accuracy: 0.7958 - loss: 0.4873 - val_accuracy: 0.8028 - val_loss: 0.4672
+Epoch 7/30
+140/140 - 0s - 3ms/step - accuracy: 0.7924 - loss: 0.4849 - val_accuracy: 0.7988 - val_loss: 0.4624
+Epoch 8/30
+140/140 - 0s - 3ms/step - accuracy: 0.7989 - loss: 0.4819 - val_accuracy: 0.7988 - val_loss: 0.4619
+Epoch 9/30
+140/140 - 0s - 3ms/step - accuracy: 0.7956 - loss: 0.4774 - val_accuracy: 0.7948 - val_loss: 0.4607
+Epoch 10/30
+140/140 - 0s - 3ms/step - accuracy: 0.7960 - loss: 0.4800 - val_accuracy: 0.7968 - val_loss: 0.4615
+Epoch 11/30
+140/140 - 0s - 3ms/step - accuracy: 0.7971 - loss: 0.4773 - val_accuracy: 0.7968 - val_loss: 0.4599
+Epoch 12/30
+140/140 - 0s - 3ms/step - accuracy: 0.7947 - loss: 0.4764 - val_accuracy: 0.8028 - val_loss: 0.4592
+Epoch 13/30
+140/140 - 0s - 3ms/step - accuracy: 0.7965 - loss: 0.4781 - val_accuracy: 0.7968 - val_loss: 0.4590
+Epoch 14/30
+140/140 - 0s - 3ms/step - accuracy: 0.7960 - loss: 0.4749 - val_accuracy: 0.7988 - val_loss: 0.4578
+Epoch 15/30
+140/140 - 0s - 3ms/step - accuracy: 0.7951 - loss: 0.4740 - val_accuracy: 0.8028 - val_loss: 0.4607
+Epoch 16/30
+140/140 - 0s - 3ms/step - accuracy: 0.7945 - loss: 0.4751 - val_accuracy: 0.8008 - val_loss: 0.4619
+Epoch 17/30
+140/140 - 0s - 3ms/step - accuracy: 0.7913 - loss: 0.4695 - val_accuracy: 0.7968 - val_loss: 0.4588
+Epoch 18/30
+140/140 - 0s - 3ms/step - accuracy: 0.7913 - loss: 0.4730 - val_accuracy: 0.7948 - val_loss: 0.4571
+Epoch 19/30
+140/140 - 0s - 3ms/step - accuracy: 0.7938 - loss: 0.4734 - val_accuracy: 0.8048 - val_loss: 0.4585
+Epoch 20/30
+140/140 - 0s - 3ms/step - accuracy: 0.7927 - loss: 0.4700 - val_accuracy: 0.8028 - val_loss: 0.4601
+Epoch 21/30
+140/140 - 0s - 3ms/step - accuracy: 0.7929 - loss: 0.4660 - val_accuracy: 0.7988 - val_loss: 0.4562
+Epoch 22/30
+140/140 - 0s - 3ms/step - accuracy: 0.7945 - loss: 0.4689 - val_accuracy: 0.8028 - val_loss: 0.4557
+Epoch 23/30
+140/140 - 0s - 3ms/step - accuracy: 0.7933 - loss: 0.4699 - val_accuracy: 0.7948 - val_loss: 0.4573
+Epoch 24/30
+140/140 - 0s - 3ms/step - accuracy: 0.7947 - loss: 0.4670 - val_accuracy: 0.8028 - val_loss: 0.4580
+Epoch 25/30
+140/140 - 0s - 3ms/step - accuracy: 0.7942 - loss: 0.4677 - val_accuracy: 0.8048 - val_loss: 0.4576
+Epoch 26/30
+140/140 - 0s - 3ms/step - accuracy: 0.7922 - loss: 0.4686 - val_accuracy: 0.8048 - val_loss: 0.4558
+Epoch 27/30
+140/140 - 0s - 3ms/step - accuracy: 0.7904 - loss: 0.4684 - val_accuracy: 0.8028 - val_loss: 0.4564
+
+Epoch-by-epoch Results (Weekly):
+Epoch 01 | loss=0.6001 | val_loss=0.5005 | acc=0.7327 | val_acc=0.7988
+Epoch 02 | loss=0.5166 | val_loss=0.4849 | acc=0.7920 | val_acc=0.7968
+Epoch 03 | loss=0.5044 | val_loss=0.4781 | acc=0.7924 | val_acc=0.7948
+Epoch 04 | loss=0.4972 | val_loss=0.4709 | acc=0.7956 | val_acc=0.7948
+Epoch 05 | loss=0.4888 | val_loss=0.4698 | acc=0.7931 | val_acc=0.7988
+Epoch 06 | loss=0.4873 | val_loss=0.4672 | acc=0.7958 | val_acc=0.8028
+Epoch 07 | loss=0.4849 | val_loss=0.4624 | acc=0.7924 | val_acc=0.7988
+Epoch 08 | loss=0.4819 | val_loss=0.4619 | acc=0.7989 | val_acc=0.7988
+Epoch 09 | loss=0.4774 | val_loss=0.4607 | acc=0.7956 | val_acc=0.7948
+Epoch 10 | loss=0.4800 | val_loss=0.4615 | acc=0.7960 | val_acc=0.7968
+Epoch 11 | loss=0.4773 | val_loss=0.4599 | acc=0.7971 | val_acc=0.7968
+Epoch 12 | loss=0.4764 | val_loss=0.4592 | acc=0.7947 | val_acc=0.8028
+Epoch 13 | loss=0.4781 | val_loss=0.4590 | acc=0.7965 | val_acc=0.7968
+Epoch 14 | loss=0.4749 | val_loss=0.4578 | acc=0.7960 | val_acc=0.7988
+Epoch 15 | loss=0.4740 | val_loss=0.4607 | acc=0.7951 | val_acc=0.8028
+Epoch 16 | loss=0.4751 | val_loss=0.4619 | acc=0.7945 | val_acc=0.8008
+Epoch 17 | loss=0.4695 | val_loss=0.4588 | acc=0.7913 | val_acc=0.7968
+Epoch 18 | loss=0.4730 | val_loss=0.4571 | acc=0.7913 | val_acc=0.7948
+Epoch 19 | loss=0.4734 | val_loss=0.4585 | acc=0.7938 | val_acc=0.8048
+Epoch 20 | loss=0.4700 | val_loss=0.4601 | acc=0.7927 | val_acc=0.8028
+Epoch 21 | loss=0.4660 | val_loss=0.4562 | acc=0.7929 | val_acc=0.7988
+Epoch 22 | loss=0.4689 | val_loss=0.4557 | acc=0.7945 | val_acc=0.8028
+Epoch 23 | loss=0.4699 | val_loss=0.4573 | acc=0.7933 | val_acc=0.7948
+Epoch 24 | loss=0.4670 | val_loss=0.4580 | acc=0.7947 | val_acc=0.8028
+Epoch 25 | loss=0.4677 | val_loss=0.4576 | acc=0.7942 | val_acc=0.8048
+Epoch 26 | loss=0.4686 | val_loss=0.4558 | acc=0.7922 | val_acc=0.8048
+Epoch 27 | loss=0.4684 | val_loss=0.4564 | acc=0.7904 | val_acc=0.8028
+18/18 - 0s - 3ms/step - accuracy: 0.7902 - loss: 0.4734
+Weekly Test >>> loss=0.4734, acc=0.7902
+
+=== Monthly Training ===
+Epoch 1/30
+140/140 - 3s - 21ms/step - accuracy: 0.7419 - loss: 0.5950 - val_accuracy: 0.7968 - val_loss: 0.5006
+Epoch 2/30
+140/140 - 0s - 3ms/step - accuracy: 0.7931 - loss: 0.5109 - val_accuracy: 0.8008 - val_loss: 0.4851
+Epoch 3/30
+140/140 - 0s - 3ms/step - accuracy: 0.7922 - loss: 0.5017 - val_accuracy: 0.8028 - val_loss: 0.4802
+Epoch 4/30
+140/140 - 0s - 3ms/step - accuracy: 0.7969 - loss: 0.4930 - val_accuracy: 0.7948 - val_loss: 0.4718
+Epoch 5/30
+140/140 - 0s - 3ms/step - accuracy: 0.7913 - loss: 0.4883 - val_accuracy: 0.7988 - val_loss: 0.4674
+Epoch 6/30
+140/140 - 0s - 3ms/step - accuracy: 0.7960 - loss: 0.4848 - val_accuracy: 0.7948 - val_loss: 0.4656
+Epoch 7/30
+140/140 - 0s - 3ms/step - accuracy: 0.7962 - loss: 0.4887 - val_accuracy: 0.7988 - val_loss: 0.4635
+Epoch 8/30
+140/140 - 0s - 3ms/step - accuracy: 0.7942 - loss: 0.4795 - val_accuracy: 0.7988 - val_loss: 0.4612
+Epoch 9/30
+140/140 - 0s - 3ms/step - accuracy: 0.7967 - loss: 0.4770 - val_accuracy: 0.8048 - val_loss: 0.4620
+Epoch 10/30
+140/140 - 0s - 3ms/step - accuracy: 0.7938 - loss: 0.4794 - val_accuracy: 0.8028 - val_loss: 0.4608
+Epoch 11/30
+140/140 - 0s - 3ms/step - accuracy: 0.7924 - loss: 0.4836 - val_accuracy: 0.7968 - val_loss: 0.4599
+Epoch 12/30
+140/140 - 0s - 3ms/step - accuracy: 0.7940 - loss: 0.4774 - val_accuracy: 0.8048 - val_loss: 0.4598
+Epoch 13/30
+140/140 - 0s - 3ms/step - accuracy: 0.7958 - loss: 0.4740 - val_accuracy: 0.8008 - val_loss: 0.4579
+Epoch 14/30
+140/140 - 0s - 3ms/step - accuracy: 0.7907 - loss: 0.4773 - val_accuracy: 0.7968 - val_loss: 0.4580
+Epoch 15/30
+140/140 - 0s - 3ms/step - accuracy: 0.7951 - loss: 0.4773 - val_accuracy: 0.7988 - val_loss: 0.4566
+Epoch 16/30
+140/140 - 0s - 3ms/step - accuracy: 0.7947 - loss: 0.4773 - val_accuracy: 0.8008 - val_loss: 0.4563
+Epoch 17/30
+140/140 - 0s - 3ms/step - accuracy: 0.7911 - loss: 0.4744 - val_accuracy: 0.7988 - val_loss: 0.4562
+Epoch 18/30
+140/140 - 0s - 3ms/step - accuracy: 0.7933 - loss: 0.4678 - val_accuracy: 0.8028 - val_loss: 0.4570
+Epoch 19/30
+140/140 - 0s - 3ms/step - accuracy: 0.7929 - loss: 0.4710 - val_accuracy: 0.7988 - val_loss: 0.4559
+Epoch 20/30
+140/140 - 0s - 3ms/step - accuracy: 0.7960 - loss: 0.4715 - val_accuracy: 0.8048 - val_loss: 0.4569
+Epoch 21/30
+140/140 - 0s - 3ms/step - accuracy: 0.7933 - loss: 0.4700 - val_accuracy: 0.7988 - val_loss: 0.4595
+Epoch 22/30
+140/140 - 0s - 3ms/step - accuracy: 0.7951 - loss: 0.4689 - val_accuracy: 0.7968 - val_loss: 0.4580
+Epoch 23/30
+140/140 - 0s - 3ms/step - accuracy: 0.7958 - loss: 0.4654 - val_accuracy: 0.8048 - val_loss: 0.4558
+Epoch 24/30
+140/140 - 0s - 3ms/step - accuracy: 0.7898 - loss: 0.4691 - val_accuracy: 0.7968 - val_loss: 0.4582
+Epoch 25/30
+140/140 - 0s - 3ms/step - accuracy: 0.7936 - loss: 0.4674 - val_accuracy: 0.8008 - val_loss: 0.4539
+Epoch 26/30
+140/140 - 0s - 3ms/step - accuracy: 0.7951 - loss: 0.4651 - val_accuracy: 0.7988 - val_loss: 0.4549
+Epoch 27/30
+140/140 - 0s - 3ms/step - accuracy: 0.7931 - loss: 0.4667 - val_accuracy: 0.7988 - val_loss: 0.4549
+Epoch 28/30
+140/140 - 0s - 3ms/step - accuracy: 0.7936 - loss: 0.4657 - val_accuracy: 0.8028 - val_loss: 0.4547
+Epoch 29/30
+140/140 - 0s - 3ms/step - accuracy: 0.7915 - loss: 0.4646 - val_accuracy: 0.7968 - val_loss: 0.4573
+Epoch 30/30
+140/140 - 0s - 3ms/step - accuracy: 0.7942 - loss: 0.4647 - val_accuracy: 0.8028 - val_loss: 0.4541
+
+Epoch-by-epoch Results (Monthly):
+Epoch 01 | loss=0.5950 | val_loss=0.5006 | acc=0.7419 | val_acc=0.7968
+Epoch 02 | loss=0.5109 | val_loss=0.4851 | acc=0.7931 | val_acc=0.8008
+Epoch 03 | loss=0.5017 | val_loss=0.4802 | acc=0.7922 | val_acc=0.8028
+Epoch 04 | loss=0.4930 | val_loss=0.4718 | acc=0.7969 | val_acc=0.7948
+Epoch 05 | loss=0.4883 | val_loss=0.4674 | acc=0.7913 | val_acc=0.7988
+Epoch 06 | loss=0.4848 | val_loss=0.4656 | acc=0.7960 | val_acc=0.7948
+Epoch 07 | loss=0.4887 | val_loss=0.4635 | acc=0.7962 | val_acc=0.7988
+Epoch 08 | loss=0.4795 | val_loss=0.4612 | acc=0.7942 | val_acc=0.7988
+Epoch 09 | loss=0.4770 | val_loss=0.4620 | acc=0.7967 | val_acc=0.8048
+Epoch 10 | loss=0.4794 | val_loss=0.4608 | acc=0.7938 | val_acc=0.8028
+Epoch 11 | loss=0.4836 | val_loss=0.4599 | acc=0.7924 | val_acc=0.7968
+Epoch 12 | loss=0.4774 | val_loss=0.4598 | acc=0.7940 | val_acc=0.8048
+Epoch 13 | loss=0.4740 | val_loss=0.4579 | acc=0.7958 | val_acc=0.8008
+Epoch 14 | loss=0.4773 | val_loss=0.4580 | acc=0.7907 | val_acc=0.7968
+Epoch 15 | loss=0.4773 | val_loss=0.4566 | acc=0.7951 | val_acc=0.7988
+Epoch 16 | loss=0.4773 | val_loss=0.4563 | acc=0.7947 | val_acc=0.8008
+Epoch 17 | loss=0.4744 | val_loss=0.4562 | acc=0.7911 | val_acc=0.7988
+Epoch 18 | loss=0.4678 | val_loss=0.4570 | acc=0.7933 | val_acc=0.8028
+Epoch 19 | loss=0.4710 | val_loss=0.4559 | acc=0.7929 | val_acc=0.7988
+Epoch 20 | loss=0.4715 | val_loss=0.4569 | acc=0.7960 | val_acc=0.8048
+Epoch 21 | loss=0.4700 | val_loss=0.4595 | acc=0.7933 | val_acc=0.7988
+Epoch 22 | loss=0.4689 | val_loss=0.4580 | acc=0.7951 | val_acc=0.7968
+Epoch 23 | loss=0.4654 | val_loss=0.4558 | acc=0.7958 | val_acc=0.8048
+Epoch 24 | loss=0.4691 | val_loss=0.4582 | acc=0.7898 | val_acc=0.7968
+Epoch 25 | loss=0.4674 | val_loss=0.4539 | acc=0.7936 | val_acc=0.8008
+Epoch 26 | loss=0.4651 | val_loss=0.4549 | acc=0.7951 | val_acc=0.7988
+Epoch 27 | loss=0.4667 | val_loss=0.4549 | acc=0.7931 | val_acc=0.7988
+Epoch 28 | loss=0.4657 | val_loss=0.4547 | acc=0.7936 | val_acc=0.8028
+Epoch 29 | loss=0.4646 | val_loss=0.4573 | acc=0.7915 | val_acc=0.7968
+Epoch 30 | loss=0.4647 | val_loss=0.4541 | acc=0.7942 | val_acc=0.8028
+18/18 - 0s - 3ms/step - accuracy: 0.7920 - loss: 0.4725
+Monthly Test >>> loss=0.4725, acc=0.7920
+
+Models saved as 'Train8_Model_week.keras' & 'Train8_Model_month.keras'. Logs in 'logs/'.
+PS C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM>
