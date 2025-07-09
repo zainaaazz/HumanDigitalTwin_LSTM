@@ -1,128 +1,130 @@
 (hdt-lstm) C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM\Training Iteration #10 - ANN time series>python Train10.py
-2025-07-09 01:17:27.237724: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2025-07-09 01:17:28.450782: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-07-09 01:38:12.317934: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-07-09 01:38:13.814545: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 Detected 71 feature columns.
-2025-07-09 01:17:31.255912: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+2025-07-09 01:38:17.748948: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 C:\Users\USER-PC\miniconda3\envs\hdt-lstm\lib\site-packages\keras\src\layers\rnn\rnn.py:199: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
+
+=== Starting training... ===
 Epoch 1/50
-100/100 - 8s - 76ms/step - accuracy: 0.4632 - loss: 1.2245 - learning_rate: 1.0000e-03
+100/100 - 8s - 78ms/step - accuracy: 0.4642 - loss: 1.2114 - learning_rate: 1.0000e-03
 Epoch 2/50
-100/100 - 6s - 63ms/step - accuracy: 0.4052 - loss: 1.2781 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4025 - loss: 1.2690 - learning_rate: 1.0000e-03
 Epoch 3/50
-100/100 - 6s - 62ms/step - accuracy: 0.4145 - loss: 1.2427 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4068 - loss: 1.2422 - learning_rate: 1.0000e-03
 Epoch 4/50
-100/100 - 6s - 62ms/step - accuracy: 0.4433 - loss: 1.2164 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4461 - loss: 1.2174 - learning_rate: 1.0000e-03
 Epoch 5/50
-100/100 - 6s - 64ms/step - accuracy: 0.4694 - loss: 1.1942 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4664 - loss: 1.1933 - learning_rate: 5.0000e-04
 Epoch 6/50
-100/100 - 6s - 61ms/step - accuracy: 0.4695 - loss: 1.2137 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4703 - loss: 1.2132 - learning_rate: 5.0000e-04
 Epoch 7/50
-100/100 - 6s - 61ms/step - accuracy: 0.4669 - loss: 1.2054 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4674 - loss: 1.2061 - learning_rate: 5.0000e-04
 Epoch 8/50
-100/100 - 6s - 61ms/step - accuracy: 0.4275 - loss: 1.1905 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4419 - loss: 1.1825 - learning_rate: 5.0000e-04
 Epoch 9/50
-100/100 - 6s - 61ms/step - accuracy: 0.4740 - loss: 1.1524 - learning_rate: 1.0000e-03
+100/100 - 6s - 62ms/step - accuracy: 0.4786 - loss: 1.1561 - learning_rate: 5.0000e-04
 Epoch 10/50
-100/100 - 6s - 61ms/step - accuracy: 0.4675 - loss: 1.1633 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4658 - loss: 1.1655 - learning_rate: 5.0000e-04
 Epoch 11/50
-100/100 - 6s - 61ms/step - accuracy: 0.4609 - loss: 1.2036 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4648 - loss: 1.2014 - learning_rate: 5.0000e-04
 Epoch 12/50
-100/100 - 6s - 61ms/step - accuracy: 0.4466 - loss: 1.2369 - learning_rate: 1.0000e-03
+100/100 - 6s - 61ms/step - accuracy: 0.4468 - loss: 1.2394 - learning_rate: 5.0000e-04
 Epoch 13/50
-100/100 - 6s - 61ms/step - accuracy: 0.4486 - loss: 1.1886 - learning_rate: 5.0000e-04
+100/100 - 6s - 61ms/step - accuracy: 0.4510 - loss: 1.1908 - learning_rate: 2.5000e-04
 Epoch 14/50
-100/100 - 6s - 63ms/step - accuracy: 0.4701 - loss: 1.1641 - learning_rate: 5.0000e-04
+100/100 - 6s - 61ms/step - accuracy: 0.4725 - loss: 1.1651 - learning_rate: 2.5000e-04
 Epoch 15/50
-100/100 - 6s - 64ms/step - accuracy: 0.4452 - loss: 1.2004 - learning_rate: 5.0000e-04
+100/100 - 6s - 61ms/step - accuracy: 0.4456 - loss: 1.2040 - learning_rate: 2.5000e-04
 Epoch 16/50
-100/100 - 7s - 69ms/step - accuracy: 0.4714 - loss: 1.1594 - learning_rate: 2.5000e-04
+100/100 - 6s - 61ms/step - accuracy: 0.4671 - loss: 1.1676 - learning_rate: 1.2500e-04
 Epoch 17/50
-100/100 - 7s - 69ms/step - accuracy: 0.4520 - loss: 1.2291 - learning_rate: 2.5000e-04
+100/100 - 6s - 61ms/step - accuracy: 0.4464 - loss: 1.2429 - learning_rate: 1.2500e-04
 Epoch 18/50
-2025-07-09 01:19:23.939419: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+2025-07-09 01:40:07.337105: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
          [[{{node IteratorGetNext}}]]
 C:\Users\USER-PC\miniconda3\envs\hdt-lstm\lib\site-packages\keras\src\trainers\epoch_iterator.py:160: UserWarning: Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches. You may need to use the `.repeat()` function when building your dataset.
   self._interrupted_warning()
-100/100 - 4s - 43ms/step - accuracy: 0.4248 - loss: 1.2817 - learning_rate: 2.5000e-04
+100/100 - 4s - 37ms/step - accuracy: 0.4243 - loss: 1.2849 - learning_rate: 1.2500e-04
 Epoch 19/50
-2025-07-09 01:19:24.090918: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+2025-07-09 01:40:07.455335: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
          [[{{node IteratorGetNext}}]]
-100/100 - 0s - 1ms/step - accuracy: 0.8351 - loss: 0.9475 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8613 - loss: 0.8798 - learning_rate: 6.2500e-05
 Epoch 20/50
-100/100 - 0s - 1ms/step - accuracy: 0.8398 - loss: 0.9429 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8617 - loss: 0.8777 - learning_rate: 6.2500e-05
 Epoch 21/50
-2025-07-09 01:19:24.383892: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+2025-07-09 01:40:07.687319: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
          [[{{node IteratorGetNext}}]]
-100/100 - 0s - 1ms/step - accuracy: 0.8421 - loss: 0.9355 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8618 - loss: 0.8734 - learning_rate: 6.2500e-05
 Epoch 22/50
-100/100 - 0s - 1ms/step - accuracy: 0.8448 - loss: 0.9256 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8619 - loss: 0.8669 - learning_rate: 6.2500e-05
 Epoch 23/50
-100/100 - 0s - 2ms/step - accuracy: 0.8468 - loss: 0.9125 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8625 - loss: 0.8589 - learning_rate: 6.2500e-05
 Epoch 24/50
-100/100 - 0s - 1ms/step - accuracy: 0.8499 - loss: 0.8991 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8621 - loss: 0.8507 - learning_rate: 6.2500e-05
 Epoch 25/50
-2025-07-09 01:19:24.968521: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+2025-07-09 01:40:08.147585: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
          [[{{node IteratorGetNext}}]]
-100/100 - 0s - 1ms/step - accuracy: 0.8530 - loss: 0.8826 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8630 - loss: 0.8410 - learning_rate: 6.2500e-05
 Epoch 26/50
-100/100 - 0s - 1ms/step - accuracy: 0.8530 - loss: 0.8666 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8634 - loss: 0.8316 - learning_rate: 6.2500e-05
 Epoch 27/50
-100/100 - 0s - 2ms/step - accuracy: 0.8579 - loss: 0.8508 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8635 - loss: 0.8211 - learning_rate: 6.2500e-05
 Epoch 28/50
-100/100 - 0s - 1ms/step - accuracy: 0.8597 - loss: 0.8342 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8643 - loss: 0.8107 - learning_rate: 6.2500e-05
 Epoch 29/50
-100/100 - 0s - 1ms/step - accuracy: 0.8602 - loss: 0.8178 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8639 - loss: 0.8021 - learning_rate: 6.2500e-05
 Epoch 30/50
-100/100 - 0s - 1ms/step - accuracy: 0.8610 - loss: 0.7995 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8647 - loss: 0.7901 - learning_rate: 6.2500e-05
 Epoch 31/50
-100/100 - 0s - 2ms/step - accuracy: 0.8626 - loss: 0.7863 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8648 - loss: 0.7800 - learning_rate: 6.2500e-05
 Epoch 32/50
-100/100 - 0s - 2ms/step - accuracy: 0.8634 - loss: 0.7678 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8647 - loss: 0.7704 - learning_rate: 6.2500e-05
 Epoch 33/50
-2025-07-09 01:19:26.145432: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+2025-07-09 01:40:09.065256: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
          [[{{node IteratorGetNext}}]]
-100/100 - 0s - 2ms/step - accuracy: 0.8637 - loss: 0.7521 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8648 - loss: 0.7596 - learning_rate: 6.2500e-05
 Epoch 34/50
-100/100 - 0s - 1ms/step - accuracy: 0.8647 - loss: 0.7347 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8647 - loss: 0.7508 - learning_rate: 6.2500e-05
 Epoch 35/50
-100/100 - 0s - 2ms/step - accuracy: 0.8645 - loss: 0.7192 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8649 - loss: 0.7402 - learning_rate: 6.2500e-05
 Epoch 36/50
-100/100 - 0s - 2ms/step - accuracy: 0.8650 - loss: 0.7045 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.7317 - learning_rate: 6.2500e-05
 Epoch 37/50
-100/100 - 0s - 2ms/step - accuracy: 0.8649 - loss: 0.6904 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.7222 - learning_rate: 6.2500e-05
 Epoch 38/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6751 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.7132 - learning_rate: 6.2500e-05
 Epoch 39/50
-100/100 - 0s - 1ms/step - accuracy: 0.8649 - loss: 0.6615 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.7029 - learning_rate: 6.2500e-05
 Epoch 40/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6498 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6952 - learning_rate: 6.2500e-05
 Epoch 41/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6353 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6848 - learning_rate: 6.2500e-05
 Epoch 42/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6243 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6796 - learning_rate: 6.2500e-05
 Epoch 43/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6123 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6697 - learning_rate: 6.2500e-05
 Epoch 44/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6026 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6627 - learning_rate: 6.2500e-05
 Epoch 45/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.5912 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6547 - learning_rate: 6.2500e-05
 Epoch 46/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.5806 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6485 - learning_rate: 6.2500e-05
 Epoch 47/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.5721 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6408 - learning_rate: 6.2500e-05
 Epoch 48/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.5632 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6353 - learning_rate: 6.2500e-05
 Epoch 49/50
-2025-07-09 01:19:28.373310: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+2025-07-09 01:40:10.905970: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
          [[{{node IteratorGetNext}}]]
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.5564 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6270 - learning_rate: 6.2500e-05
 Epoch 50/50
-100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.5485 - learning_rate: 1.2500e-04
+100/100 - 0s - 1ms/step - accuracy: 0.8650 - loss: 0.6217 - learning_rate: 6.2500e-05
 
 === Starting evaluation over the entire dataset… ===
-Evaluating: 100%|██████████████████████████████████████████████████████████████████| 1761/1761 [09:25<00:00,  3.11it/s]
+Evaluating: 100%|██████████████████████████████████████████████████████████████████| 1761/1761 [09:04<00:00,  3.24it/s]
 C:\Users\USER-PC\miniconda3\envs\hdt-lstm\lib\site-packages\sklearn\metrics\_classification.py:1706: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
   _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
 C:\Users\USER-PC\miniconda3\envs\hdt-lstm\lib\site-packages\sklearn\metrics\_classification.py:1706: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
@@ -131,33 +133,41 @@ C:\Users\USER-PC\miniconda3\envs\hdt-lstm\lib\site-packages\sklearn\metrics\_cla
   _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
 
 ======== Model Evaluation Report ========
-Accuracy       : 0.4094
-ROC AUC (ovr)  : 0.6507
+Accuracy       : 0.4170
+ROC AUC (ovr)  : 0.6664
 
 Classification Report:
                precision    recall  f1-score   support
 
-   Withdrawn       0.64      0.11      0.19   2742120
-        Fail       0.39      0.04      0.07   1904040
-        Pass       0.40      0.97      0.56   3337470
+   Withdrawn       0.62      0.13      0.21   2742120
+        Fail       0.38      0.08      0.14   1904040
+        Pass       0.40      0.95      0.57   3337470
  Distinction       0.00      0.00      0.00    816480
 
-    accuracy                           0.41   8800110
-   macro avg       0.36      0.28      0.20   8800110
-weighted avg       0.43      0.41      0.29   8800110
+    accuracy                           0.42   8800110
+   macro avg       0.35      0.29      0.23   8800110
+weighted avg       0.43      0.42      0.31   8800110
 
 Confusion Matrix:
- [[ 299698   74785 2367637       0]
- [  82085   69606 1752349       0]
- [  71883   31837 3233750       0]
- [  12328    2859  801293       0]]
-Traceback (most recent call last):
-  File "C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM\Training Iteration #10 - ANN time series\Train10.py", line 123, in <module>
-    model.save(MODEL_SAVE_PATH)
-  File "C:\Users\USER-PC\miniconda3\envs\hdt-lstm\lib\site-packages\keras\src\utils\traceback_utils.py", line 122, in error_handler
-    raise e.with_traceback(filtered_tb) from None
-  File "C:\Users\USER-PC\miniconda3\envs\hdt-lstm\lib\site-packages\keras\src\saving\saving_api.py", line 114, in save_model
-    raise ValueError(
-ValueError: Invalid filepath extension for saving. Please add either a `.keras` extension for the native Keras format (recommended) or a `.h5` extension. Use `model.export(filepath)` if you want to export a SavedModel for use with TFLite/TFServing/etc. Received: filepath=C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM\Training Iteration #10 - ANN time series\Train10Model.
+ [[ 352452  170041 2219627       0]
+ [ 104526  160692 1638822       0]
+ [  93444   87500 3156526       0]
+ [  14484    6882  795114       0]]
+Saved artifact at 'C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM\Training Iteration #10 - ANN time series\Train10Model'. The following endpoints are available:
+
+* Endpoint 'serve'
+  args_0 (POSITIONAL_ONLY): TensorSpec(shape=(None, 1, 71), dtype=tf.float32, name='keras_tensor')
+Output Type:
+  TensorSpec(shape=(None, 4), dtype=tf.float32, name=None)
+Captures:
+  2111304353744: TensorSpec(shape=(), dtype=tf.resource, name=None)
+  2111304357616: TensorSpec(shape=(), dtype=tf.resource, name=None)
+  2111304366064: TensorSpec(shape=(), dtype=tf.resource, name=None)
+  2111304364128: TensorSpec(shape=(), dtype=tf.resource, name=None)
+  2111304353568: TensorSpec(shape=(), dtype=tf.resource, name=None)
+  2111304358144: TensorSpec(shape=(), dtype=tf.resource, name=None)
+  2111304280272: TensorSpec(shape=(), dtype=tf.resource, name=None)
+
+Model exported to: C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM\Training Iteration #10 - ANN time series\Train10Model
 
 (hdt-lstm) C:\Users\USER-PC\Desktop\HumanDigitalTwin_LSTM\Training Iteration #10 - ANN time series>
