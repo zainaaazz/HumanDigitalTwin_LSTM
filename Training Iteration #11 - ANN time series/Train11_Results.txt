@@ -1,0 +1,535 @@
+(venv) PS C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM> python ".\Training Iteration #11 - ANN time series\Train11.py"
+2025-08-03 21:11:47.624813: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Detected 71 feature columns: ['id_student', 'date', 'homepage', 'oucontent', 'subpage', 'url', 'forumng', 'resource', 'repeatactivity', 'glossary', 'dataplus', 'oucollaborate', 'htmlactivity', 'questionnaire', 'dualpane', 'quiz', 'externalquiz', 'page', 'folder', 'ouwiki', 'sharedsubpage', 'ouelluminate', 'num_of_prev_attempts', 'studied_credits', 'code_module_AAA', 'code_module_BBB', 'code_module_CCC', 'code_module_DDD', 'code_module_EEE', 'code_module_FFF', 'code_module_GGG', 'code_presentation_2013B', 'code_presentation_2013J', 'code_presentation_2014B', 'code_presentation_2014J', 'gender_F', 'gender_M', 'region_East Anglian Region', 'region_East Midlands Region', 'region_Ireland', 'region_London Region', 'region_North Region', 'region_North Western Region', 'region_Scotland', 'region_South East Region', 'region_South Region', 'region_South West Region', 'region_Wales', 'region_West Midlands Region', 'region_Yorkshire Region', 'highest_education_A Level or Equivalent', 'highest_education_HE Qualification', 'highest_education_Lower Than A Level', 'highest_education_No Formal quals', 'highest_education_Post Graduate Qualification', 'imd_band_0', 'imd_band_0-10%', 'imd_band_10-20', 'imd_band_20-30%', 'imd_band_30-40%', 'imd_band_40-50%', 'imd_band_50-60%', 'imd_band_60-70%', 'imd_band_70-80%', 'imd_band_80-90%', 'imd_band_90-100%', 'age_band_0-35', 'age_band_35-55', 'age_band_55<=', 'disability_N', 'disability_Y']
+Samples -> Train: 4928061, Val: 1232016, Test: 2640033
+2025-08-03 21:14:15.165375: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ lstm (LSTM)                          │ (None, 200)                 │         217,600 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 200)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 100)                 │          20,100 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 100)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_1 (Dense)                      │ (None, 4)                   │             404 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 238,104 (930.09 KB)
+ Trainable params: 238,104 (930.09 KB)
+ Non-trainable params: 0 (0.00 B)
+Epoch 1/100
+
+Epoch 1: val_loss improved from None to 0.85983, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 277s - 6ms/step - categorical_accuracy: 0.5265 - loss: 1.0600 - val_categorical_accuracy: 0.6400 - val_loss: 0.8598
+Epoch 2/100
+
+Epoch 2: val_loss improved from 0.85983 to 0.70295, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 328s - 7ms/step - categorical_accuracy: 0.6060 - loss: 0.8862 - val_categorical_accuracy: 0.7205 - val_loss: 0.7030
+Epoch 3/100
+
+Epoch 3: val_loss improved from 0.70295 to 0.62664, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 325s - 7ms/step - categorical_accuracy: 0.6376 - loss: 0.8092 - val_categorical_accuracy: 0.7524 - val_loss: 0.6266
+Epoch 4/100
+
+Epoch 4: val_loss improved from 0.62664 to 0.58681, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.6557 - loss: 0.7643 - val_categorical_accuracy: 0.7736 - val_loss: 0.5868
+Epoch 5/100
+
+Epoch 5: val_loss improved from 0.58681 to 0.55722, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.6683 - loss: 0.7330 - val_categorical_accuracy: 0.7875 - val_loss: 0.5572
+Epoch 6/100
+
+Epoch 6: val_loss improved from 0.55722 to 0.53594, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 321s - 7ms/step - categorical_accuracy: 0.6779 - loss: 0.7102 - val_categorical_accuracy: 0.7971 - val_loss: 0.5359
+Epoch 7/100
+
+Epoch 7: val_loss improved from 0.53594 to 0.51670, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.6853 - loss: 0.6924 - val_categorical_accuracy: 0.8025 - val_loss: 0.5167
+Epoch 8/100
+
+Epoch 8: val_loss improved from 0.51670 to 0.50263, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.6915 - loss: 0.6778 - val_categorical_accuracy: 0.8086 - val_loss: 0.5026
+Epoch 9/100
+
+Epoch 9: val_loss improved from 0.50263 to 0.49082, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 331s - 7ms/step - categorical_accuracy: 0.6967 - loss: 0.6657 - val_categorical_accuracy: 0.8162 - val_loss: 0.4908
+Epoch 10/100
+
+Epoch 10: val_loss improved from 0.49082 to 0.48587, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 315s - 6ms/step - categorical_accuracy: 0.7011 - loss: 0.6558 - val_categorical_accuracy: 0.8195 - val_loss: 0.4859
+Epoch 11/100
+
+Epoch 11: val_loss improved from 0.48587 to 0.47708, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 7ms/step - categorical_accuracy: 0.7046 - loss: 0.6468 - val_categorical_accuracy: 0.8231 - val_loss: 0.4771
+Epoch 12/100
+
+Epoch 12: val_loss improved from 0.47708 to 0.46994, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 327s - 7ms/step - categorical_accuracy: 0.7079 - loss: 0.6387 - val_categorical_accuracy: 0.8235 - val_loss: 0.4699
+Epoch 13/100
+
+Epoch 13: val_loss improved from 0.46994 to 0.45870, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 297s - 6ms/step - categorical_accuracy: 0.7112 - loss: 0.6314 - val_categorical_accuracy: 0.8289 - val_loss: 0.4587
+Epoch 14/100
+
+Epoch 14: val_loss improved from 0.45870 to 0.45157, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 297s - 6ms/step - categorical_accuracy: 0.7138 - loss: 0.6250 - val_categorical_accuracy: 0.8295 - val_loss: 0.4516
+Epoch 15/100
+
+Epoch 15: val_loss improved from 0.45157 to 0.44896, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7164 - loss: 0.6190 - val_categorical_accuracy: 0.8332 - val_loss: 0.4490
+Epoch 16/100
+
+Epoch 16: val_loss improved from 0.44896 to 0.44317, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 334s - 7ms/step - categorical_accuracy: 0.7188 - loss: 0.6137 - val_categorical_accuracy: 0.8350 - val_loss: 0.4432
+Epoch 17/100
+
+Epoch 17: val_loss improved from 0.44317 to 0.44141, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 324s - 7ms/step - categorical_accuracy: 0.7209 - loss: 0.6089 - val_categorical_accuracy: 0.8361 - val_loss: 0.4414
+Epoch 18/100
+
+Epoch 18: val_loss improved from 0.44141 to 0.43472, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 312s - 6ms/step - categorical_accuracy: 0.7227 - loss: 0.6047 - val_categorical_accuracy: 0.8386 - val_loss: 0.4347
+Epoch 19/100
+
+Epoch 19: val_loss improved from 0.43472 to 0.42971, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 333s - 7ms/step - categorical_accuracy: 0.7247 - loss: 0.6008 - val_categorical_accuracy: 0.8398 - val_loss: 0.4297
+Epoch 20/100
+
+Epoch 20: val_loss improved from 0.42971 to 0.42766, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7267 - loss: 0.5965 - val_categorical_accuracy: 0.8403 - val_loss: 0.4277
+Epoch 21/100
+
+Epoch 21: val_loss improved from 0.42766 to 0.41935, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 345s - 7ms/step - categorical_accuracy: 0.7281 - loss: 0.5924 - val_categorical_accuracy: 0.8428 - val_loss: 0.4194
+Epoch 22/100
+
+Epoch 22: val_loss did not improve from 0.41935
+49281/49281 - 291s - 6ms/step - categorical_accuracy: 0.7300 - loss: 0.5888 - val_categorical_accuracy: 0.8444 - val_loss: 0.4198
+Epoch 23/100
+
+Epoch 23: val_loss improved from 0.41935 to 0.41536, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 286s - 6ms/step - categorical_accuracy: 0.7312 - loss: 0.5860 - val_categorical_accuracy: 0.8466 - val_loss: 0.4154
+Epoch 24/100
+
+Epoch 24: val_loss improved from 0.41536 to 0.40883, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 7ms/step - categorical_accuracy: 0.7327 - loss: 0.5830 - val_categorical_accuracy: 0.8466 - val_loss: 0.4088
+Epoch 25/100
+
+Epoch 25: val_loss did not improve from 0.40883
+49281/49281 - 324s - 7ms/step - categorical_accuracy: 0.7335 - loss: 0.5803 - val_categorical_accuracy: 0.8474 - val_loss: 0.4120
+Epoch 26/100
+
+Epoch 26: val_loss did not improve from 0.40883
+49281/49281 - 286s - 6ms/step - categorical_accuracy: 0.7350 - loss: 0.5771 - val_categorical_accuracy: 0.8487 - val_loss: 0.4089
+Epoch 27/100
+
+Epoch 27: val_loss improved from 0.40883 to 0.39990, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7362 - loss: 0.5743 - val_categorical_accuracy: 0.8527 - val_loss: 0.3999
+Epoch 28/100
+
+Epoch 28: val_loss did not improve from 0.39990
+49281/49281 - 309s - 6ms/step - categorical_accuracy: 0.7375 - loss: 0.5717 - val_categorical_accuracy: 0.8509 - val_loss: 0.4019
+Epoch 29/100
+
+Epoch 29: val_loss did not improve from 0.39990
+49281/49281 - 336s - 7ms/step - categorical_accuracy: 0.7384 - loss: 0.5696 - val_categorical_accuracy: 0.8517 - val_loss: 0.4010
+Epoch 30/100
+
+Epoch 30: val_loss improved from 0.39990 to 0.39628, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 283s - 6ms/step - categorical_accuracy: 0.7396 - loss: 0.5668 - val_categorical_accuracy: 0.8538 - val_loss: 0.3963
+Epoch 31/100
+
+Epoch 31: val_loss did not improve from 0.39628
+49281/49281 - 314s - 6ms/step - categorical_accuracy: 0.7404 - loss: 0.5652 - val_categorical_accuracy: 0.8542 - val_loss: 0.3987
+Epoch 32/100
+
+Epoch 32: val_loss improved from 0.39628 to 0.39267, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 334s - 7ms/step - categorical_accuracy: 0.7415 - loss: 0.5626 - val_categorical_accuracy: 0.8554 - val_loss: 0.3927
+Epoch 33/100
+
+Epoch 33: val_loss improved from 0.39267 to 0.39219, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7425 - loss: 0.5605 - val_categorical_accuracy: 0.8558 - val_loss: 0.3922
+Epoch 34/100
+
+Epoch 34: val_loss improved from 0.39219 to 0.38847, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7433 - loss: 0.5586 - val_categorical_accuracy: 0.8567 - val_loss: 0.3885
+Epoch 35/100
+
+Epoch 35: val_loss improved from 0.38847 to 0.38773, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 311s - 6ms/step - categorical_accuracy: 0.7442 - loss: 0.5568 - val_categorical_accuracy: 0.8566 - val_loss: 0.3877
+Epoch 36/100
+
+Epoch 36: val_loss improved from 0.38773 to 0.38281, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 330s - 7ms/step - categorical_accuracy: 0.7453 - loss: 0.5542 - val_categorical_accuracy: 0.8585 - val_loss: 0.3828
+Epoch 37/100
+
+Epoch 37: val_loss did not improve from 0.38281
+49281/49281 - 325s - 7ms/step - categorical_accuracy: 0.7460 - loss: 0.5531 - val_categorical_accuracy: 0.8591 - val_loss: 0.3851
+Epoch 38/100
+
+Epoch 38: val_loss did not improve from 0.38281
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7465 - loss: 0.5513 - val_categorical_accuracy: 0.8586 - val_loss: 0.3836
+Epoch 39/100
+
+Epoch 39: val_loss improved from 0.38281 to 0.37652, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7476 - loss: 0.5494 - val_categorical_accuracy: 0.8599 - val_loss: 0.3765
+Epoch 40/100
+
+Epoch 40: val_loss did not improve from 0.37652
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7480 - loss: 0.5481 - val_categorical_accuracy: 0.8594 - val_loss: 0.3821
+Epoch 41/100
+
+Epoch 41: val_loss did not improve from 0.37652
+49281/49281 - 312s - 6ms/step - categorical_accuracy: 0.7490 - loss: 0.5465 - val_categorical_accuracy: 0.8625 - val_loss: 0.3785
+Epoch 42/100
+
+Epoch 42: val_loss did not improve from 0.37652
+49281/49281 - 332s - 7ms/step - categorical_accuracy: 0.7492 - loss: 0.5454 - val_categorical_accuracy: 0.8614 - val_loss: 0.3790
+Epoch 43/100
+
+Epoch 43: val_loss did not improve from 0.37652
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7500 - loss: 0.5436 - val_categorical_accuracy: 0.8601 - val_loss: 0.3770
+Epoch 44/100
+
+Epoch 44: val_loss improved from 0.37652 to 0.37529, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7503 - loss: 0.5420 - val_categorical_accuracy: 0.8617 - val_loss: 0.3753
+Epoch 45/100
+
+Epoch 45: val_loss improved from 0.37529 to 0.37410, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7510 - loss: 0.5413 - val_categorical_accuracy: 0.8636 - val_loss: 0.3741
+Epoch 46/100
+
+Epoch 46: val_loss did not improve from 0.37410
+49281/49281 - 325s - 7ms/step - categorical_accuracy: 0.7517 - loss: 0.5403 - val_categorical_accuracy: 0.8634 - val_loss: 0.3764
+Epoch 47/100
+
+Epoch 47: val_loss improved from 0.37410 to 0.36883, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7524 - loss: 0.5382 - val_categorical_accuracy: 0.8607 - val_loss: 0.3688
+Epoch 48/100
+
+Epoch 48: val_loss did not improve from 0.36883
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7526 - loss: 0.5377 - val_categorical_accuracy: 0.8614 - val_loss: 0.3728
+Epoch 49/100
+
+Epoch 49: val_loss improved from 0.36883 to 0.36748, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7533 - loss: 0.5360 - val_categorical_accuracy: 0.8647 - val_loss: 0.3675
+Epoch 50/100
+
+Epoch 50: val_loss did not improve from 0.36748
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7541 - loss: 0.5351 - val_categorical_accuracy: 0.8657 - val_loss: 0.3684
+Epoch 51/100
+
+Epoch 51: val_loss did not improve from 0.36748
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7543 - loss: 0.5337 - val_categorical_accuracy: 0.8626 - val_loss: 0.3695
+Epoch 52/100
+
+Epoch 52: val_loss did not improve from 0.36748
+49281/49281 - 321s - 7ms/step - categorical_accuracy: 0.7548 - loss: 0.5326 - val_categorical_accuracy: 0.8657 - val_loss: 0.3681
+Epoch 53/100
+
+Epoch 53: val_loss improved from 0.36748 to 0.36741, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7550 - loss: 0.5320 - val_categorical_accuracy: 0.8652 - val_loss: 0.3674
+Epoch 54/100
+
+Epoch 54: val_loss improved from 0.36741 to 0.36711, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 321s - 7ms/step - categorical_accuracy: 0.7557 - loss: 0.5308 - val_categorical_accuracy: 0.8630 - val_loss: 0.3671
+Epoch 55/100
+
+Epoch 55: val_loss did not improve from 0.36711
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7560 - loss: 0.5299 - val_categorical_accuracy: 0.8644 - val_loss: 0.3672
+Epoch 56/100
+
+Epoch 56: val_loss improved from 0.36711 to 0.36668, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7564 - loss: 0.5292 - val_categorical_accuracy: 0.8656 - val_loss: 0.3667
+Epoch 57/100
+
+Epoch 57: val_loss improved from 0.36668 to 0.36257, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7567 - loss: 0.5280 - val_categorical_accuracy: 0.8651 - val_loss: 0.3626
+Epoch 58/100
+
+Epoch 58: val_loss did not improve from 0.36257
+49281/49281 - 319s - 6ms/step - categorical_accuracy: 0.7574 - loss: 0.5269 - val_categorical_accuracy: 0.8664 - val_loss: 0.3627
+Epoch 59/100
+
+Epoch 59: val_loss improved from 0.36257 to 0.35932, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 326s - 7ms/step - categorical_accuracy: 0.7579 - loss: 0.5258 - val_categorical_accuracy: 0.8676 - val_loss: 0.3593
+Epoch 60/100
+
+Epoch 60: val_loss did not improve from 0.35932
+49281/49281 - 321s - 7ms/step - categorical_accuracy: 0.7584 - loss: 0.5247 - val_categorical_accuracy: 0.8657 - val_loss: 0.3596
+Epoch 61/100
+
+Epoch 61: val_loss improved from 0.35932 to 0.35787, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7585 - loss: 0.5240 - val_categorical_accuracy: 0.8665 - val_loss: 0.3579
+Epoch 62/100
+
+Epoch 62: val_loss did not improve from 0.35787
+49281/49281 - 324s - 7ms/step - categorical_accuracy: 0.7591 - loss: 0.5233 - val_categorical_accuracy: 0.8666 - val_loss: 0.3602
+Epoch 63/100
+
+Epoch 63: val_loss improved from 0.35787 to 0.35627, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 311s - 6ms/step - categorical_accuracy: 0.7592 - loss: 0.5223 - val_categorical_accuracy: 0.8662 - val_loss: 0.3563
+Epoch 64/100
+
+Epoch 64: val_loss improved from 0.35627 to 0.35550, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 330s - 7ms/step - categorical_accuracy: 0.7598 - loss: 0.5212 - val_categorical_accuracy: 0.8677 - val_loss: 0.3555
+Epoch 65/100
+
+Epoch 65: val_loss did not improve from 0.35550
+49281/49281 - 314s - 6ms/step - categorical_accuracy: 0.7600 - loss: 0.5207 - val_categorical_accuracy: 0.8665 - val_loss: 0.3612
+Epoch 66/100
+
+Epoch 66: val_loss improved from 0.35550 to 0.35494, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7603 - loss: 0.5205 - val_categorical_accuracy: 0.8673 - val_loss: 0.3549
+Epoch 67/100
+
+Epoch 67: val_loss improved from 0.35494 to 0.35418, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 333s - 7ms/step - categorical_accuracy: 0.7607 - loss: 0.5194 - val_categorical_accuracy: 0.8678 - val_loss: 0.3542
+Epoch 68/100
+
+Epoch 68: val_loss improved from 0.35418 to 0.35067, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 310s - 6ms/step - categorical_accuracy: 0.7612 - loss: 0.5184 - val_categorical_accuracy: 0.8696 - val_loss: 0.3507
+Epoch 69/100
+
+Epoch 69: val_loss did not improve from 0.35067
+49281/49281 - 337s - 7ms/step - categorical_accuracy: 0.7612 - loss: 0.5178 - val_categorical_accuracy: 0.8693 - val_loss: 0.3536
+Epoch 70/100
+
+Epoch 70: val_loss did not improve from 0.35067
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7616 - loss: 0.5171 - val_categorical_accuracy: 0.8669 - val_loss: 0.3549
+Epoch 71/100
+
+Epoch 71: val_loss did not improve from 0.35067
+49281/49281 - 321s - 7ms/step - categorical_accuracy: 0.7621 - loss: 0.5164 - val_categorical_accuracy: 0.8678 - val_loss: 0.3542
+Epoch 72/100
+
+Epoch 72: val_loss improved from 0.35067 to 0.35047, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7619 - loss: 0.5157 - val_categorical_accuracy: 0.8682 - val_loss: 0.3505
+Epoch 73/100
+
+Epoch 73: val_loss did not improve from 0.35047
+49281/49281 - 321s - 7ms/step - categorical_accuracy: 0.7625 - loss: 0.5146 - val_categorical_accuracy: 0.8707 - val_loss: 0.3514
+Epoch 74/100
+
+Epoch 74: val_loss did not improve from 0.35047
+49281/49281 - 330s - 7ms/step - categorical_accuracy: 0.7627 - loss: 0.5144 - val_categorical_accuracy: 0.8685 - val_loss: 0.3545
+Epoch 75/100
+
+Epoch 75: val_loss did not improve from 0.35047
+49281/49281 - 313s - 6ms/step - categorical_accuracy: 0.7634 - loss: 0.5137 - val_categorical_accuracy: 0.8709 - val_loss: 0.3508
+Epoch 76/100
+
+Epoch 76: val_loss did not improve from 0.35047
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7637 - loss: 0.5130 - val_categorical_accuracy: 0.8705 - val_loss: 0.3514
+Epoch 77/100
+
+Epoch 77: val_loss did not improve from 0.35047
+49281/49281 - 325s - 7ms/step - categorical_accuracy: 0.7636 - loss: 0.5126 - val_categorical_accuracy: 0.8694 - val_loss: 0.3509
+Epoch 78/100
+
+Epoch 78: val_loss improved from 0.35047 to 0.35001, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7640 - loss: 0.5121 - val_categorical_accuracy: 0.8698 - val_loss: 0.3500
+Epoch 79/100
+
+Epoch 79: val_loss improved from 0.35001 to 0.34889, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 324s - 7ms/step - categorical_accuracy: 0.7645 - loss: 0.5109 - val_categorical_accuracy: 0.8717 - val_loss: 0.3489
+Epoch 80/100
+
+Epoch 80: val_loss improved from 0.34889 to 0.34790, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 318s - 6ms/step - categorical_accuracy: 0.7646 - loss: 0.5106 - val_categorical_accuracy: 0.8709 - val_loss: 0.3479
+Epoch 81/100
+
+Epoch 81: val_loss improved from 0.34790 to 0.34657, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7648 - loss: 0.5100 - val_categorical_accuracy: 0.8708 - val_loss: 0.3466
+Epoch 82/100
+
+Epoch 82: val_loss improved from 0.34657 to 0.34473, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7651 - loss: 0.5091 - val_categorical_accuracy: 0.8713 - val_loss: 0.3447
+Epoch 83/100
+
+Epoch 83: val_loss did not improve from 0.34473
+49281/49281 - 271s - 5ms/step - categorical_accuracy: 0.7654 - loss: 0.5086 - val_categorical_accuracy: 0.8707 - val_loss: 0.3448
+Epoch 84/100
+
+Epoch 84: val_loss did not improve from 0.34473
+49281/49281 - 337s - 7ms/step - categorical_accuracy: 0.7656 - loss: 0.5082 - val_categorical_accuracy: 0.8720 - val_loss: 0.3457
+Epoch 85/100
+
+Epoch 85: val_loss improved from 0.34473 to 0.34367, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7658 - loss: 0.5075 - val_categorical_accuracy: 0.8719 - val_loss: 0.3437
+Epoch 86/100
+
+Epoch 86: val_loss did not improve from 0.34367
+49281/49281 - 318s - 6ms/step - categorical_accuracy: 0.7663 - loss: 0.5067 - val_categorical_accuracy: 0.8730 - val_loss: 0.3446
+Epoch 87/100
+
+Epoch 87: val_loss did not improve from 0.34367
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7660 - loss: 0.5070 - val_categorical_accuracy: 0.8703 - val_loss: 0.3473
+Epoch 88/100
+
+Epoch 88: val_loss did not improve from 0.34367
+49281/49281 - 321s - 7ms/step - categorical_accuracy: 0.7665 - loss: 0.5061 - val_categorical_accuracy: 0.8714 - val_loss: 0.3439
+Epoch 89/100
+
+Epoch 89: val_loss improved from 0.34367 to 0.34232, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7667 - loss: 0.5055 - val_categorical_accuracy: 0.8733 - val_loss: 0.3423
+Epoch 90/100
+
+Epoch 90: val_loss improved from 0.34232 to 0.34115, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 287s - 6ms/step - categorical_accuracy: 0.7668 - loss: 0.5051 - val_categorical_accuracy: 0.8708 - val_loss: 0.3412
+Epoch 91/100
+
+Epoch 91: val_loss did not improve from 0.34115
+49281/49281 - 318s - 6ms/step - categorical_accuracy: 0.7671 - loss: 0.5042 - val_categorical_accuracy: 0.8715 - val_loss: 0.3432
+Epoch 92/100
+
+Epoch 92: val_loss did not improve from 0.34115
+49281/49281 - 325s - 7ms/step - categorical_accuracy: 0.7679 - loss: 0.5035 - val_categorical_accuracy: 0.8725 - val_loss: 0.3424
+Epoch 93/100
+
+Epoch 93: val_loss did not improve from 0.34115
+49281/49281 - 309s - 6ms/step - categorical_accuracy: 0.7674 - loss: 0.5038 - val_categorical_accuracy: 0.8694 - val_loss: 0.3426
+Epoch 94/100
+
+Epoch 94: val_loss improved from 0.34115 to 0.33935, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 332s - 7ms/step - categorical_accuracy: 0.7682 - loss: 0.5024 - val_categorical_accuracy: 0.8734 - val_loss: 0.3393
+Epoch 95/100
+
+Epoch 95: val_loss did not improve from 0.33935
+49281/49281 - 325s - 7ms/step - categorical_accuracy: 0.7679 - loss: 0.5026 - val_categorical_accuracy: 0.8733 - val_loss: 0.3410
+Epoch 96/100
+
+Epoch 96: val_loss did not improve from 0.33935
+49281/49281 - 322s - 7ms/step - categorical_accuracy: 0.7685 - loss: 0.5021 - val_categorical_accuracy: 0.8722 - val_loss: 0.3402
+Epoch 97/100
+
+Epoch 97: val_loss did not improve from 0.33935
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7685 - loss: 0.5015 - val_categorical_accuracy: 0.8737 - val_loss: 0.3393
+Epoch 98/100
+
+Epoch 98: val_loss did not improve from 0.33935
+49281/49281 - 324s - 7ms/step - categorical_accuracy: 0.7689 - loss: 0.5009 - val_categorical_accuracy: 0.8722 - val_loss: 0.3404
+Epoch 99/100
+
+Epoch 99: val_loss improved from 0.33935 to 0.33899, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 323s - 7ms/step - categorical_accuracy: 0.7689 - loss: 0.5006 - val_categorical_accuracy: 0.8726 - val_loss: 0.3390
+Epoch 100/100
+
+Epoch 100: val_loss improved from 0.33899 to 0.33792, saving model to C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_best_model.h5
+ save_model(model, 'my_model.keras')`.
+49281/49281 - 320s - 6ms/step - categorical_accuracy: 0.7693 - loss: 0.4998 - val_categorical_accuracy: 0.8739 - val_loss: 0.3379
+26401/26401 ━━━━━━━━━━━━━━━━━━━━ 60s 2ms/step
+
+Basic Evaluation:
+Test Accuracy     : 0.8744
+
+Classification Report:
+              precision    recall  f1-score   support
+
+   Withdrawn       0.89      0.88      0.88    822636
+        Fail       0.89      0.81      0.85    571212
+        Pass       0.88      0.90      0.89   1001241
+ Distinction       0.78      0.93      0.85    244944
+
+    accuracy                           0.87   2640033
+   macro avg       0.86      0.88      0.87   2640033
+weighted avg       0.88      0.87      0.87   2640033
+
+Confusion Matrix:
+[[723848  29575  54439  14774]
+ [ 37881 461323  57702  14306]
+ [ 47345  24001 896217  33678]
+ [  6932   3159   7875 226978]]
+
+Aggregated Metrics:
+Precision (Macro):    0.8607
+Precision (Micro):    0.8744
+Precision (Weighted): 0.8762
+Recall    (Macro):    0.8773
+Recall    (Micro):    0.8744
+Recall    (Weighted): 0.8744
+F1-score  (Macro):    0.8670
+F1-score  (Micro):    0.8744
+F1-score  (Weighted): 0.8743
+
+Overall ROC AUC (OVR): 0.9844
+Class-wise ROC AUC:
+  Withdrawn : 0.9837
+  Fail      : 0.9827
+  Pass      : 0.9777
+  Distinction: 0.9935
+
+
+Traceback (most recent call last):
+  File "C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11.py", line 176, in <module>
+    model.save(final_path)
+    ~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\venv\Lib\site-packages\keras\src\utils\traceback_utils.py", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\venv\Lib\site-packages\keras\src\saving\saving_api.py", line 114, in save_model
+    raise ValueError(
+    ...<6 lines>...
+    )
+ValueError: Invalid filepath extension for saving. Please add either a `.keras` extension for the native Keras format (recommended) or a `.h5` extension. Use `model.export(filepath)` if you want to export a SavedModel for use with TFLite/TFServing/etc. Received: filepath=C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM\Training Iteration #11 - ANN time series\Train11Model\Train11_final_model.
+(venv) PS C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM>
