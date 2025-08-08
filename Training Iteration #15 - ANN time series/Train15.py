@@ -315,7 +315,16 @@ def evaluate_model(trainX, trainy, testX, testy):
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
     print(model.summary())
    
-    history=model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=0,validation_split=0.2)
+    from keras.callbacks import CSVLogger
+    log_path = os.path.join(MODEL_DIR, f"history_day_{time_steps}.csv")
+    csv_logger = CSVLogger(log_path, append=False)
+
+    history = model.fit(trainX, trainy,
+                        epochs=epochs,
+                        batch_size=batch_size,
+                        verbose=0,
+                        validation_split=0.2,
+                        callbacks=[csv_logger])    
     
     
     _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=1)
@@ -329,7 +338,12 @@ def evaluate_model(trainX, trainy, testX, testy):
     pyplot.xlabel('epoch')
     pyplot.legend(['train', 'val','test'], loc='upper left')
     pyplot.legend()
-    pyplot.show();
+
+    #Save categorical accuracy images
+    plot_path = os.path.join(MODEL_DIR, f"trainval_day_{time_steps}.png")
+    pyplot.savefig(plot_path)
+    pyplot.close()
+    print(f"[Saved] train/val curves → {plot_path}")
    
     # -------save the trained model for this day ---
     model_filename = f"model_day_{time_steps}.h5"
@@ -395,7 +409,11 @@ pyplot.ylabel('categorical accuracy')
 pyplot.xlabel('days')
 pyplot.legend(['test'], loc='upper left')
 pyplot.legend()
-pyplot.show();
+
+summary_path = os.path.join(MODEL_DIR, "all_days_accuracy.png")
+pyplot.savefig(summary_path)
+pyplot.close()
+print(f"[Saved] all-days accuracy plot → {summary_path}")
 
 
 # %%
