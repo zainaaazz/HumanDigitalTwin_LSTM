@@ -147,8 +147,21 @@ def prepare_dataset():
     print('##############################################################################################################################')
     # define min max scaler
     scaler = MinMaxScaler()
-    
+
+    # capture feature names for later preprocessing in Streamlit
+    feature_cols = sample_rows.drop(columns=['final_result','id_student']).columns.tolist()
+
+     # fit & transform
     X = scaler.fit_transform(X)
+
+    # --- save preprocessing artifacts ---
+    import pickle
+    with open(os.path.join(MODEL_DIR, "scaler.pkl"), "wb") as f:
+        pickle.dump(scaler, f)
+    with open(os.path.join(MODEL_DIR, "feature_cols.pkl"), "wb") as f:
+        pickle.dump(feature_cols, f)
+
+
     print('X after apply minmax transforming')
     print(X[:1])
     print(X.shape)
