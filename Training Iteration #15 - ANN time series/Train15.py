@@ -1,8 +1,12 @@
+#cd C:\Users\S_CSIS-PostGrad\Desktop\HumanDigitalTwin_LSTM
+#Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+#. .\venv\Scripts\Activate.ps1
+#python ".\Training Iteration #15 - ANN time series\Train15.py"
+
 # %%
 #ANN-LSTM model
- # %%  (somewhere near the top, after your imports)
+ # %%  
 import os
-
 import pandas as pd
 import numpy as np
 from numpy import std
