@@ -15,14 +15,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from numpy import mean
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.layers import LSTM
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, LSTM
 from matplotlib import pyplot
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 import sklearn
+
 print(f'NumPy: {np.__version__}')
 print(f'pandas: {pd.__version__}')
 print(f'scikit-learn: {sklearn.__version__}')
@@ -47,15 +46,13 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 
 # %%
 # load the prepared OULAD dataset
-data_final=pd.read_csv('C:\\Users\\S_CSIS-PostGrad\\Desktop\\HumanDigitalTwin_LSTM\\Training Iteration #15 - ANN time series\\data.csv', sep=',')
+data_final = pd.read_csv('data.csv', sep=',')
 print(data_final.head())
 print(data_final.shape)
 print()
 print()
 
 # %%
-
-
 
 def prepare_dataset():
     print('experiment of time_steps= ',time_steps)
