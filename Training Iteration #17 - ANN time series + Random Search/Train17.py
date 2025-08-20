@@ -62,9 +62,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 
 import tensorflow as tf
+
 from tensorflow.keras import Model
 from tensorflow.keras.layers import Input, Masking, LSTM, Dropout, Dense, Bidirectional
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, CSVLogger
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, CSVLogger, Callback
+
 from tensorflow.keras.utils import to_categorical
 from matplotlib import pyplot as plt
 
@@ -118,6 +120,44 @@ class LSTMConfig:
     final_dropout: float
     optimizer: str
     learning_rate: float
+
+
+# Custom training progress callback
+class TrainingProgress(Callback):
+    def on_epoch_end(self, epoch, logs=None):
+        logs = logs or {}
+        print(
+            f"Epoch {epoch + 1}: "
+            f"loss={logs.get('loss'):.4f}, "
+            f"accuracy={logs.get('accuracy'):.4f}, "
+            f"val_loss={logs.get('val_loss'):.4f}, "
+            f"val_accuracy={logs.get('val_accuracy'):.4f}"
+        )
+
+# --------------------------------------------------------------------------------------
+# Custom succinct per-epoch printer (terminal updates)
+# --------------------------------------------------------------------------------------
+class EpochPrinter(Callback):
+    def __init__(self, header: str = ""):
+        super().__init__()
+        self.header = header
+    def on_epoch_end(self, epoch, logs=None):
+        logs = logs or {}
+        # metric names used in this script
+        loss = logs.get('loss')
+        acc = logs.get('categorical_accuracy') or logs.get('accuracy')
+        vloss = logs.get('val_loss')
+        vacc = logs.get('val_categorical_accuracy') or logs.get('val_accuracy')
+
+        def fmt(x):
+            return f"{x:.4f}" if isinstance(x, (int, float)) else "-"
+        print(
+            f"{self.header} Epoch {epoch+1}: "
+            f"loss={fmt(loss)} acc={fmt(acc)} "
+            f"val_loss={fmt(vloss)} val_acc={fmt(vacc)}",
+            flush=True
+        )
+
 
 
 def sample_random_config() -> LSTMConfig:
@@ -186,46 +226,43 @@ dups = df.duplicated(subset=['id_student', 'date']).sum()
 print('Duplicate (id_student, date) rows:', dups)
 print('\n')
 
-print('Preparing fixed-length sequences per student...')
+print('Preparing fixed-length sequences per student (vectorized)...')
 
-def to_fixed_sequence(g: pd.DataFrame) -> pd.DataFrame:
-    # ensure consistent ordering
-    g = g.sort_values(['date'])
+# 1) Identify numeric columns to sum per (id_student, date)
+num_cols = df.select_dtypes(include=['number']).columns.tolist()
+exclude_from_sum = {'id_student', 'date'}
+num_sum_cols = [c for c in num_cols if c not in exclude_from_sum]
 
-    # --- 1) collapse duplicates per (student, day) ---
-    # numeric features -> sum; final_result -> mode/first; id_student -> first
-    num_cols = g.select_dtypes(include=['number']).columns.tolist()
-    exclude_from_sum = {'id_student', 'date'}
-    num_sum_cols = [c for c in num_cols if c not in exclude_from_sum]
+# (Optional) reduce memory before heavy ops
+for c in num_sum_cols:
+    if pd.api.types.is_float_dtype(df[c]):
+        df[c] = df[c].astype('float32')
+    elif pd.api.types.is_integer_dtype(df[c]):
+        df[c] = pd.to_numeric(df[c], downcast='integer')
 
-    def mode_or_first(s: pd.Series):
-        m = s.mode(dropna=True)
-        return m.iloc[0] if len(m) else s.iloc[0]
+# 2) Collapse duplicates ONCE with a single groupby (fast, all numeric at once)
+#    This gives one row per (student, day) with summed counts.
+g_num = df.groupby(['id_student', 'date'], sort=False, observed=True)[num_sum_cols].sum()
 
-    agg_dict = {c: 'sum' for c in num_sum_cols}
-    agg_dict.update({'id_student': 'first'})
-    if 'final_result' in g.columns:
-        agg_dict['final_result'] = mode_or_first
+# 3) Build the full student×day index and reindex (pads missing days)
+all_students = df['id_student'].dropna().unique()
+full_index = pd.MultiIndex.from_product([all_students, range(SEQ_LEN)],
+                                        names=['id_student', 'date'])
+g_num = g_num.reindex(full_index, fill_value=0)
 
-    # group by day and aggregate
-    g = g.groupby('date', as_index=True).agg(agg_dict)
+# 4) Get each student's final_result (mode or first) once per student
+def mode_or_first(s: pd.Series):
+    m = s.mode(dropna=True)
+    return m.iloc[0] if len(m) else s.iloc[0]
 
-    # --- 2) pad to full [0..SEQ_LEN-1] range ---
-    g = g.reindex(range(SEQ_LEN))
+final_per_student = df.groupby('id_student', observed=True)['final_result'].agg(mode_or_first)
 
-    # fill id_student and final_result onto padded rows
-    if 'id_student' in g.columns:
-        g['id_student'] = g['id_student'].ffill().bfill()
-    if 'final_result' in g.columns:
-        g['final_result'] = g['final_result'].ffill().bfill()
+# 5) Assemble final dataframe: reset_index and attach final_result
+df = g_num.reset_index()
+df['final_result'] = df['id_student'].map(final_per_student)
 
-    # back to a column
-    g = g.reset_index().rename(columns={'index': 'date'})
-    return g
+print('[OK] Sequences padded to 270 timesteps each (vectorized).')
 
-# Apply per-student collapsing + padding
-df = df.groupby('id_student', group_keys=False, sort=False).apply(to_fixed_sequence)
-print('[OK] Sequences padded to 270 timesteps each.')
 
 # --------------------------------------------------------------------------------------
 # Feature scaling, label encoding, reshape to sequences, and 70/30 DEV/TEST split
@@ -314,14 +351,15 @@ def run_single_trial(trial_id: int, config: LSTMConfig) -> Tuple[float, str]:
     rlr = ReduceLROnPlateau(monitor='val_categorical_accuracy', mode='max', patience=PATIENCE_RLR, factor=0.5, min_lr=1e-6)
 
     hist = model.fit(
-        X_tr, y_tr,
-        validation_data=(X_va, y_va, m_va),
-        epochs=BASE_EPOCHS,
-        batch_size=BATCH_SIZE,
-        verbose=0,
-        callbacks=[csv_logger, es, rlr],
-        sample_weight=m_tr
+    X_tr, y_tr,
+    validation_data=(X_va, y_va, m_va),
+    epochs=BASE_EPOCHS,
+    batch_size=BATCH_SIZE,
+    verbose=0,  # keep Keras quiet; we print via EpochPrinter
+    callbacks=[csv_logger, es, rlr, EpochPrinter(header=f"[Trial {trial_id:03d}]")],
+    sample_weight=m_tr
     )
+
 
     # best val acc
     best_val_acc = max(hist.history.get('val_categorical_accuracy', [0.0]))
@@ -400,10 +438,11 @@ hist = best_model.fit(
     validation_data=(X_vaf, y_vaf, m_vaf),
     epochs=BASE_EPOCHS*2,
     batch_size=BATCH_SIZE,
-    verbose=1,
-    callbacks=[csv_logger, es, rlr],
+    verbose=0,  # use our own concise printer
+    callbacks=[csv_logger, es, rlr, EpochPrinter(header='[Best]')],
     sample_weight=m_trf
 )
+
 
 best_model.save(os.path.join(ROOT_DIR, 'best_model_dev.h5'))
 
