@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Training Iteration #17 — Random Architecture Search for LSTM (Many‑to‑Many)
 ---------------------------------------------------------------------------
@@ -44,6 +43,13 @@ Notes
  - Uses sample_weight masks to ignore padded days in loss/metrics.
  - Random search space is defined in `sample_random_config()`.
  - Adjust N_TRIALS for time (default 100).
+
+
+conda activate hdt_env
+cd Desktop
+cd HumanDigitalTwin_LSTM
+cd "Training Iteration #17 - ANN time series + Random Search"
+python Train17.py
 """
 
 import os
@@ -165,7 +171,7 @@ def sample_random_config() -> LSTMConfig:
     units_choices = [64, 96, 128, 160, 200, 256, 320]
     lstm_units = [random.choice(units_choices) for _ in range(n_layers)]
     return LSTMConfig(
-        bidirectional=random.choice([False, True]),
+        bidirectional=False,  # <-- force unidirectional
         n_lstm_layers=n_layers,
         lstm_units=lstm_units,
         lstm_recurrent_dropout=random.choice([0.0, 0.1, 0.2, 0.3]),
@@ -178,11 +184,15 @@ def sample_random_config() -> LSTMConfig:
     )
 
 
+
 def make_optimizer(name: str, lr: float):
     if name == "adam":
         return tf.keras.optimizers.Adam(learning_rate=lr)
     if name == "adamw":
-        return tf.keras.optimizers.AdamW(learning_rate=lr)
+        try:
+            return tf.keras.optimizers.AdamW(learning_rate=lr)
+        except AttributeError:
+            return tf.keras.optimizers.Adam(learning_rate=lr)
     if name == "nadam":
         return tf.keras.optimizers.Nadam(learning_rate=lr)
     return tf.keras.optimizers.Adam(learning_rate=lr)
@@ -190,7 +200,7 @@ def make_optimizer(name: str, lr: float):
 
 def build_model(config: LSTMConfig, n_features: int, n_classes: int) -> Model:
     inp = Input(shape=(SEQ_LEN, n_features))
-    x = Masking(mask_value=0.0, name='masking')(inp)
+    x = inp  # no masking; zero-activity days are valid timesteps
     for i, units in enumerate(config.lstm_units, start=1):
         if config.bidirectional:
             x = Bidirectional(LSTM(units, return_sequences=True,
@@ -220,6 +230,42 @@ df = pd.read_csv('data.csv', sep=',')
 print(df.head())
 print(df.shape)
 print('\n')
+
+
+#####################################################################################################
+
+ALLOWED_MODULES = ["BBB"]   #Using only BBB to train
+
+#ALLOWED_MODULES = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"] 
+
+#Module Domain              Presentations   Students
+#AAA    Social Sciences     2               748
+#BBB    Social Sciences     4               7909 <--
+#CCC    STEM                2               4434 
+#DDD    STEM                4               6272 
+#EEE    STEM                3               2934
+#FFF    STEM                4               7762 
+#GGG    Social Sciences     3               2534
+
+# Build expected one-hot column names
+keep_cols = [f"code_module_{m}" for m in ALLOWED_MODULES]
+
+keep_cols = [c for c in keep_cols if c in df.columns]
+if not keep_cols:
+    print("[Filter] No matching code_module_* columns found; skipping filter.")
+else:
+    before = len(df)
+    mask_keep = (df[keep_cols].sum(axis=1) >= 1)
+    df = df[mask_keep].copy()
+    print(f"[Filter] Kept rows for modules {ALLOWED_MODULES} via {keep_cols}. Rows: {before} -> {len(df)}")
+
+    other_module_cols = [c for c in df.columns if c.startswith("code_module_") and c not in keep_cols]
+    if other_module_cols:
+        df.drop(columns=other_module_cols, inplace=True)
+        print(f"[Filter] Dropped non-selected module columns: {len(other_module_cols)} columns")
+
+        
+#################################################################################################
 
 # --- check for duplicate (student, day) combos ---
 dups = df.duplicated(subset=['id_student', 'date']).sum()
@@ -269,22 +315,32 @@ print('[OK] Sequences padded to 270 timesteps each (vectorized).')
 # --------------------------------------------------------------------------------------
 # Keep 'date' as a feature; exclude only final_result and id_student
 feature_cols = [c for c in df.columns if c not in ['final_result', 'id_student']]
-# Optional: drop index-artifact feature if present
 feature_cols = [c for c in feature_cols if c != 'Unnamed: 0']
 
-# Build per-timestep mask BEFORE fillna (1 where original features were present)
-row_mask = (~df[feature_cols].isna()).any(axis=1).astype(float)
-
-# Fill NaNs then scale (MinMaxScaler cannot handle NaN)
-scaler = MinMaxScaler()
+df = df.sort_values(['id_student', 'date']).reset_index(drop=True)
+# Flat feature matrix BEFORE any split (fill zeros for safety)
 X_flat = df[feature_cols].copy()
-X_flat[feature_cols] = X_flat[feature_cols].fillna(0)
-X_flat[feature_cols] = scaler.fit_transform(X_flat[feature_cols])
+X_flat[feature_cols] = X_flat[feature_cols].astype('float32')
 
-# Encode labels
+# Encode labels once
 le = LabelEncoder()
 df['final_result_enc'] = le.fit_transform(df['final_result'].astype(str))
 num_classes = len(le.classes_)
+
+# Determine sequence sizes
+students = df['id_student'].unique()
+N = len(students)
+F = len(feature_cols)
+
+# Split by student: 70% DEV / 30% TEST
+all_idx = np.arange(N)
+idx_dev, idx_test = train_test_split(all_idx, test_size=0.30, random_state=SEED)
+students_dev, students_test = students[idx_dev], students[idx_test]
+
+# Fit scaler on DEV rows only, then transform ALL rows
+dev_mask_flat = df['id_student'].isin(students_dev).to_numpy()
+scaler = MinMaxScaler().fit(X_flat.loc[dev_mask_flat, feature_cols])
+X_flat[feature_cols] = scaler.transform(X_flat[feature_cols])
 
 # Persist preprocessing artifacts
 with open(os.path.join(ARTIF_DIR, 'scaler.pkl'), 'wb') as f:
@@ -295,22 +351,15 @@ with open(os.path.join(ARTIF_DIR, 'label_encoder.pkl'), 'wb') as f:
     pickle.dump(le, f)
 print('[Saved] scaler.pkl, feature_cols.pkl, label_encoder.pkl')
 
-# Reshape into [N_students, 270, F] and targets [N_students, 270, C]
-students = df['id_student'].unique()
-N = len(students)
-F = len(feature_cols)
-
+# Reshape to sequences
 X = X_flat.to_numpy().reshape(N, SEQ_LEN, F)
 y_int = df['final_result_enc'].to_numpy().reshape(N, SEQ_LEN)
 y = to_categorical(y_int, num_classes=num_classes)
-mask = row_mask.to_numpy().reshape(N, SEQ_LEN)
 
-print(f'X shape: {X.shape}  y shape: {y.shape}  mask shape: {mask.shape}')
+# Make every day count
+mask = np.ones((N, SEQ_LEN), dtype=float)
 
-# DEV/TEST split by student: 70% / 30%
-all_idx = np.arange(N)
-idx_dev, idx_test = train_test_split(all_idx, test_size=0.30, random_state=SEED)
-
+# Slice arrays to DEV/TEST
 X_dev, X_test = X[idx_dev], X[idx_test]
 y_dev, y_test = y[idx_dev], y[idx_test]
 mask_dev, mask_test = mask[idx_dev], mask[idx_test]
@@ -319,6 +368,7 @@ students_dev, students_test = students[idx_dev], students[idx_test]
 print('##############################################################################################################################')
 print(f'DEV size: {X_dev.shape[0]} students  |  TEST size: {X_test.shape[0]} students')
 print('##############################################################################################################################')
+
 
 # --------------------------------------------------------------------------------------
 # Helper: single trial train/val split, train model, return best val metric
